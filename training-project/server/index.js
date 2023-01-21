@@ -4,7 +4,7 @@ app.use(express.json());
 const controllers = require("../db/controllers.js");
 app.use(express.static(__dirname + "/../client/dist"));
 
-let port = 3000;
+let port = process.env.PORT;
 
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
