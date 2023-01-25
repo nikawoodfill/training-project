@@ -41,8 +41,8 @@ html {
 
 .navButton {
     font-family: 'Signika Negative', sans-serif;
-    text-decoration: none;
-    color: #678b9d;
+    text-decoration:  none !important;
+    color: #678b9d;   
 }
 
 .navButton:hover {

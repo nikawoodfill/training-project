@@ -1,19 +1,26 @@
 import React from 'react';
 import Link from 'next/link';
-// import './app.css';
+import styled from 'styled-components'
+
+
+
+const NavButton = styled.div` 
+    font-family: 'Signika Negative', sans-serif;
+    text-decoration: none;
+    color: #678b9d;   
+}
+ & :hover {
+    color: #d38e84;
+  }
+  `
 
 function NavBar() {
-    
-      return (
-        // <Link className = "navButton" to="/"> My Workouts &nbsp;&nbsp;&nbsp;</Link>
-        // <Link className = "navButton" to="/progress">My Progress  &nbsp;&nbsp;&nbsp;</Link>
-        // <Link className = "navButton" to="/resources"> Resources</Link>
-        
+    return (       
        <div className ="banner">
         <div className = "buttonContainer">
-          <button>
-            <Link className = "navButton" href="/">My Workouts </Link>
-            </button>
+          <NavButton>
+            <Link href="/">My Workouts </Link>
+            </NavButton>
             </div>
             </div>
       )

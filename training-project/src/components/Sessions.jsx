@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Sessions = ({workout,handleSessionView,setSelectWorkout}) => {
 const date = new Date(workout.date).toDateString();
 return(
