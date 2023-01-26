@@ -25,7 +25,7 @@ const ModalContent = styled.div`
   border-radius: 10px; /* 5px rounded corners */
 `
 
-const AddWorkoutModal = ({modalForm, setModalForm, name,question,formError, handleFormSubmit, handleAddWorkout}) => {
+const AddWorkoutModal = ({modalForm, setModalForm,formError, handleFormSubmit, handleAddWorkout}) => {
   const handleModalChange = (e) => {
     console.log(e.target.value)
     setModalForm({

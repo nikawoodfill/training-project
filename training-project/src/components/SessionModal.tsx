@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Climbs from '../components/Climbs'
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { useRouter } from 'next/router';
 
 
 const Modal = styled.div`
@@ -26,29 +28,60 @@ const ModalContent = styled.div`
 `
 
 const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment,setComment}) => {
-
-    const [exercise, setExercise] = useState({});
+   interface keyable {
+      [key: string]: any  
+    }
+    const [exercise, setExercise] = useState(selectWorkout.exercise);
     const [editComment, setEditComment] = useState(false);
     const [commentChange, setCommentChange] = useState(false);
-    const [newComment, setNewComment] = useState(comment);
+    const [newComment, setNewComment] = useState(selectWorkout.comments);
+    const router = useRouter();
+    const refreshData = () => {
+      router.replace(router.asPath);
+    }
    
     useEffect(() => {
       setClimbs(selectWorkout.exercise) 
       setComment(selectWorkout.comments)
       setNewComment(selectWorkout.comments)
-  },[])
+   },[])
 
-    const handleCommentChange = (e) => {
+    const handleCommentChange = (e:any) => {
         if (!commentChange) {
             setCommentChange(true) };
         setNewComment(e.target.value)
     }
 
-    const handleModalChange = (e) => {
+    const handleModalChange = (e:any) => {
     setExercise({
       ...exercise,
       [e.target.name] : e.target.value
   })}
+
+  const handleCommentSubmit  = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    setComment(newComment)
+    if (commentChange) {
+      try {
+        const body = { 
+          id : selectWorkout.id, 
+          comments : newComment,
+          }
+        const res = await fetch('/api/comment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+          })
+          if (res.status < 300) {
+            refreshData();
+          }
+      } catch (error) {
+        console.error(error);
+      }  
+    }
+    setEditComment(false);
+
+    }
 
   const handleFormSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -60,19 +93,21 @@ const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment
         attempts : exercise.attempts,
         completed :exercise.completed === "True"
         }}
-      await fetch('/api/climb', {
+      const res = await fetch('/api/climb', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
         })
-        .then((res) => {
+        if (res.status < 300) {
+          refreshData();
+    
           setClimbs([...climbs, {
               grade: exercise.grade,
               attempts : exercise.attempts,
               completed :exercise.completed === "True"
           }] )
-        })
-    } catch (error) {
+        }
+        } catch (error) {
       console.error(error);
     }
     }
@@ -170,13 +205,15 @@ const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment
         {!editComment&&<span className ="medGrey">{newComment}</span>}
         {editComment&&
         <form onChange={handleCommentChange} onSubmit = {handleCommentSubmit}>
-        <textarea className="text-input" maxLength='1000' rows='4' cols='50' value ={newComment}/>
+        <textarea className="text-input" value ={newComment}/>
         <br/>
         <br/>
         <input className = "submit-button" type='submit' value='Done'/>
         </form>}
-        &nbsp;&nbsp;&nbsp;
-        {/* {!editComment&& <img onClick = {() => setEditComment(true)} className='edit-1' src ={edit}/>} */}
+        {!editComment&& 
+        <IconButton onClick = {() => setEditComment(true)}>
+          <BorderColorIcon/> 
+          </IconButton>}
        </ModalContent>
     </Modal>
   )

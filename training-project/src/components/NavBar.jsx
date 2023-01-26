@@ -1,26 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Link from 'next/link';
-import styled from 'styled-components'
-
-
-
-const NavButton = styled.div` 
-    font-family: 'Signika Negative', sans-serif;
-    text-decoration: none;
-    color: #678b9d;   
-}
- & :hover {
-    color: #d38e84;
-  }
-  `
+import bg from '../../public/trainingproject.png'
 
 function NavBar() {
+
+  const [hover, setHover] = useState(false);
+
+  const handleMouseEnter = () => {
+    setHover(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHover(false);
+  };
     return (       
-       <div className ="banner">
+       <div className ="banner" style = {{backgroundImage: `url(${bg.src})`}}>
         <div className = "buttonContainer">
-          <NavButton>
-            <Link href="/">My Workouts </Link>
-            </NavButton>
+          <div className= 'navButton'  onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}>
+            <Link style={{ textDecoration: 'none', color: hover ?  '#d38e84': '#678b9d' }} href="/">My Workouts </Link>
+            </div>
             </div>
             </div>
       )

@@ -1,7 +1,6 @@
 import prisma from "../../../lib/prisma";
-
 export default async function handle(req, res) {
-  const climb = await prisma.workouts.update({
+  const comment = await prisma.workouts.update({
     where: {
       id: req.body.id,
     },
@@ -15,5 +14,5 @@ export default async function handle(req, res) {
       },
     },
   });
-  res.json(climb);
+  res.json(comment);
 }
