@@ -8,21 +8,17 @@ datasource db {
 }
 
 type WorkoutsExercise {
-  id        String  @map("_id") @db.ObjectId
+  id        String  @map("_id")
   attempts  Int
   completed Boolean
   grade     String
 }
 
-model users {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-}
-
 model workouts {
   id       String             @id @default(auto()) @map("_id") @db.ObjectId
-  v        Int                @map("__v")
+  v        Int                @default(0) @map("__v") @ignore 
   comments String
-  date     DateTime           @db.Date
+  date     String
   exercise WorkoutsExercise[]
   goal     String
   type     String

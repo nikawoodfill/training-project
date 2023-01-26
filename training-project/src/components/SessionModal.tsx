@@ -5,15 +5,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import Climbs from '../components/Climbs'
 
 
-// const Close = styled.i`
-// position: absolute;
-// top:15% auto;
-// right: 18%;
-// width:2%;
-// height: 2%;
-// cursor:pointer;
-// `
-
 const Modal = styled.div`
   position: fixed;
   z-index: 100;

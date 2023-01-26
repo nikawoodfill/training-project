@@ -29,7 +29,8 @@
     "react-dom": "18.2.0",
     "react-lite-youtube-embed": "^2.3.52",
     "react-spring": "^9.6.1",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "swr": "^2.0.1"
   },
   "devDependencies": {
     "@types/react": "18.0.27",

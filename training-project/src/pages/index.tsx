@@ -11,7 +11,7 @@ import Sessions from '../components/Sessions.jsx';
 import IconButton from '@mui/material/IconButton';
 import styled from 'styled-components'
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
-import { useSpring, animated } from "react-spring";
+import useSWR from 'swr';
 
 // import photo from '../square-plus-solid-1.svg'
 import AddWorkoutModal from '../components/AddWorkoutModal';
@@ -55,37 +55,45 @@ const Workouts = ({workouts}) => {
   const [comment,setComment] = useState("");
 
 
+
+
   const handleAddWorkout = () => {
     setModal(!modal)  }
 
   const handleSessionView = () => {
     setSessionModal(!sessionModal)  }
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault()
-    if (Object.values(modalForm).length >= 2) {
-      const a = await prisma.workouts.create({
-          date: new Date(modalForm.workoutDate),
-          goal: modalForm.sessionGoals,
-          exercise : [],
-          type: modalForm.choice,
-          comments: ""
-        })
-        .then((res) => {
-          setWorkouts([...workouts, {
+  const handleFormSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+      if (Object.values(modalForm).length >= 2) {
+        try {
+          const body = { 
             date: new Date(modalForm.workoutDate),
             goal: modalForm.sessionGoals,
             exercise : [],
             type: modalForm.choice,
             comments: ""
-          }])
+            }
+          await fetch('/api/newWorkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+            })
+          .then((res) => {
+            setWorkouts([...workouts, {
+              date: new Date(modalForm.workoutDate),
+              goal: modalForm.sessionGoals,
+              exercise : [],
+              type: modalForm.choice,
+              comments: ""
+            }] )
+          })
+        } catch (error) {
+          console.error(error);
+        }
           setModal(false)
-        })
-      }
-      else {
-        setFormError(true)
-     }
-  } 
+      };
+    }
 
   return (
     <div>
@@ -95,7 +103,7 @@ const Workouts = ({workouts}) => {
     <h1 className = 'title'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Workouts</h1>
     <div className='cards'>
     <Card>
-      <AddBoxRoundedIcon sx={{fontSize:"1000%", color: "white" }}/>
+      <AddBoxRoundedIcon onClick={handleAddWorkout} sx={{fontSize:"1000%", color: "white" }}/>
     </Card>
     {workouts.map((workout,key) => {
         return (
