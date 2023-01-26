@@ -1,6 +1,4 @@
-
 import React, {useState} from 'react';
-import '../app.css';
 import Videos from './Resources.jsx';
 import { videoListYT } from '../videoList';
 
