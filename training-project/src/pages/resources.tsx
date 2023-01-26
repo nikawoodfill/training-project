@@ -1,18 +1,16 @@
 import React, {useState} from 'react';
-// import '../app.css';
-// import Videos from './Videos.jsx';
-// import { videoListYT } from '../videoList';
-import NavBar from '../components/NavBar.jsx';
+import Videos from '../components/Videos.jsx';
+import { videoListYT } from '../../public/videoList';
 
 const Resources= () => {
-    // sconst [videoList,setVideoList] = useState(videoListYT)
+    const [videoList,setVideoList] = useState(videoListYT)
     return (
         <div className='container'>
-          <NavBar/>
             <div className ="title">
              <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Climbing Inspiration and Resources</h1>
-            {/*</div>
+            </div>
             <div className='inner-container'>
+              <div className='cards'>
             {videoList.map((video,key) => {
           return(
             <div key={key}>
@@ -20,8 +18,9 @@ const Resources= () => {
             </div>
 
           )})
-            } */}
+            } 
     </div> 
+       </div>
        </div>
 
     );

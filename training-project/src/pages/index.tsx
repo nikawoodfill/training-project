@@ -73,7 +73,6 @@ const Workouts = ({workouts}) => {
 
   return (
     <div>
-    <NavBar/>
     <div className="container">
     <div className = "inner-container">
     <h1 className = 'title'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Workouts</h1>
