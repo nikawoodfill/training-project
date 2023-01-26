@@ -10,7 +10,7 @@ const Resources= () => {
              <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Climbing Inspiration and Resources</h1>
             </div>
             <div className='inner-container'>
-              <div className='cards'>
+              <div className='video-grid'>
             {videoList.map((video,key) => {
           return(
             <div key={key}>
@@ -19,10 +19,9 @@ const Resources= () => {
 
           )})
             } 
-    </div> 
+       </div> 
        </div>
        </div>
-
     );
 }
 
