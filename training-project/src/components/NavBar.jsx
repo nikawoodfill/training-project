@@ -20,6 +20,12 @@ function NavBar() {
         onMouseLeave={handleMouseLeave}>
             <Link style={{ textDecoration: 'none', color: hover ?  '#d38e84': '#678b9d' }} href="/">My Workouts </Link>
             </div>
+            <div className = "buttonContainer">
+          <div className= 'navButton'  onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}>
+            <Link style={{ textDecoration: 'none', color: hover ?  '#d38e84': '#678b9d' }} href="/">My Workouts </Link>
+            </div>
+            </div>
             </div>
             </div>
       )
