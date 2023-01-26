@@ -8,7 +8,6 @@ datasource db {
 }
 
 type WorkoutsExercise {
-  id        String  @map("_id")
   attempts  Int
   completed Boolean
   grade     String

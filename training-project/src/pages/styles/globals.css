@@ -39,15 +39,7 @@ html {
     overflow-y: auto;
   }  
 
-.navButton {
-    font-family: 'Signika Negative', sans-serif;
-    text-decoration:  none !important;
-    color: #678b9d;   
-}
 
-.navButton:hover {
-    color: #d38e84;
-  }
 
   .video-responsive {
     overflow: hidden;

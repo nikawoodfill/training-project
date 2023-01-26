@@ -1,4 +1,4 @@
-import React, {useState}  from 'react';
+import React, {useState,useEffect}  from 'react';
 import styled from 'styled-components';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -31,7 +31,12 @@ const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment
     const [editComment, setEditComment] = useState(false);
     const [commentChange, setCommentChange] = useState(false);
     const [newComment, setNewComment] = useState(comment);
-    setClimbs(selectWorkout.exercise)
+   
+    useEffect(() => {
+      setClimbs(selectWorkout.exercise) 
+      setComment(selectWorkout.comments)
+      setNewComment(selectWorkout.comments)
+  },[])
 
     const handleCommentChange = (e) => {
         if (!commentChange) {
@@ -45,6 +50,32 @@ const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment
       [e.target.name] : e.target.value
   })}
 
+  const handleFormSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    try {
+      const body = { 
+        id : selectWorkout.id, 
+        exercise : {
+        grade: exercise.grade,
+        attempts : exercise.attempts,
+        completed :exercise.completed === "True"
+        }}
+      await fetch('/api/climb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        })
+        .then((res) => {
+          setClimbs([...climbs, {
+              grade: exercise.grade,
+              attempts : exercise.attempts,
+              completed :exercise.completed === "True"
+          }] )
+        })
+    } catch (error) {
+      console.error(error);
+    }
+    }
 
   return(
     <Modal>
@@ -63,7 +94,7 @@ const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment
       
         <h2 className ="title">Session Goal : </h2>
         <span className ="medGrey">{selectWorkout.goal}</span>
-        <h2 className ="title">Today's Climbs : </h2>
+        <h2 className ="title">Todays Climbs : </h2>
         {climbs.length === 0 && <span className ="medGrey">No Climbs Yet. Get Grooving! </span>}
         {climbs.map((climb,key) => {
             return (
@@ -73,8 +104,7 @@ const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment
                 )
         })}
         <br/>
-        <form>
-        {/* onChange={handleModalChange} onSubmit ={handleFormSubmit}> */}
+        <form onChange={handleModalChange} onSubmit ={handleFormSubmit}>
         {selectWorkout.type === "Boulder" &&
           <select className = 'text-input-1' name="grade">
           <option value="none" selected disabled hidden>Select a Grade</option>
@@ -132,12 +162,12 @@ const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment
       &nbsp;&nbsp;&nbsp;<select className = 'text-input-1' name="completed">
           <option value="none" selected disabled hidden>Send Status</option>
           <option value="True">Crushed it!</option>
-          <option value="False">I'll get it next time!</option>
+          <option value="False">Ill get it next time!</option>
           </select>
           &nbsp;&nbsp;&nbsp;<input className = "submit-button" type='submit' value='Add Climb'/>
           </form>
         <h2 className ="title">Comments : </h2>
-        {/* {!editComment&&<span className ="medGrey">{newComment}</span>}
+        {!editComment&&<span className ="medGrey">{newComment}</span>}
         {editComment&&
         <form onChange={handleCommentChange} onSubmit = {handleCommentSubmit}>
         <textarea className="text-input" maxLength='1000' rows='4' cols='50' value ={newComment}/>
@@ -146,7 +176,7 @@ const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment
         <input className = "submit-button" type='submit' value='Done'/>
         </form>}
         &nbsp;&nbsp;&nbsp;
-        {!editComment&& <img onClick = {() => setEditComment(true)} className='edit-1' src ={edit}/>} */}
+        {/* {!editComment&& <img onClick = {() => setEditComment(true)} className='edit-1' src ={edit}/>} */}
        </ModalContent>
     </Modal>
   )
