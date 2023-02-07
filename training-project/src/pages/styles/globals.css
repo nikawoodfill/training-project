@@ -17,6 +17,7 @@ html {
   background-repeat: no-repeat;
   background-size: 26%;
   background-position: 0% 50%;
+  z-index: 70;
 } 
 .buttonContainer{
     position:relative;
