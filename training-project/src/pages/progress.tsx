@@ -6,7 +6,6 @@ import prisma from '../../lib/prisma';
 
 
 function Progress({workouts}) {
-  console.log(workouts)
   interface Exercise {
      attempts: number;
       completed: boolean;
