@@ -48,13 +48,13 @@ const SessionModal= ({handleSessionView,selectWorkout,climbs, setClimbs,comment,
    },[])
 
 
-    const handleCommentChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const handleCommentChange = (e) => {
         if (!commentChange) {
             setCommentChange(true) };
-        setNewComment(event.currentTarget.value)
+        setNewComment(e.target.value)
     }
 
-    const handleModalChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const handleModalChange = (e) => {
     setExercise({
       ...exercise,
       [e.target.name] : e.target.value
