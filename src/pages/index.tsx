@@ -10,19 +10,20 @@ import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 import { useRouter } from 'next/router';
 import AddWorkoutModal from '../components/AddWorkoutModal';
 import SessionModal from '../components/SessionModal';
+import { YoutubeSearchedFor } from "@mui/icons-material";
 
 const Container = styled.div`
   position: fixed;
   top: 10%;
   width: 95%;
   height:100%;
+  overflow-y: auto;
   }
   `
   const InnerContainer = styled.div`
     position:relative;
     width: 95%;
     height: 90%;
-    overflow-y: auto;
   } 
   `
 const Workouts = ({workouts}) => {

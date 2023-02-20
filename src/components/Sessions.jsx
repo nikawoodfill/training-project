@@ -7,7 +7,7 @@ return(
 <div className='card' onClick={() => {
     setSelectWorkout(workout) 
     handleSessionView()}}>
-<img className="mountains" src ="https://upload.wikimedia.org/wikipedia/commons/1/12/Mountains-By-The-Icon-Z-3322972.svg"></img>
+<img className="mountains" alt ="mountains" src ="https://upload.wikimedia.org/wikipedia/commons/1/12/Mountains-By-The-Icon-Z-3322972.svg"></img>
     <div className='cardcontents'>
     
         <p>
@@ -16,8 +16,8 @@ return(
         {date.slice(10,15)}
         </p>
     </div>
-    <button className='edit'>
-        </button>
+
+
 </div>
 )
 }

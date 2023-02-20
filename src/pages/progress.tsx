@@ -28,9 +28,6 @@ function Progress({workouts}) {
 
 
   const [boulderWorkouts,setBoulderWorkouts] = useState([]);
-  const [label, setLabel] = useState([])
-  const [myData, setMyData] = useState([])
-
 
   useEffect(() => {
     const boulder = workouts.filter((item : ClimbEntries) => 

@@ -27,13 +27,14 @@ const ModalContent = styled.div`
   border-radius: 10px; /* 5px rounded corners */
 `
 
-const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment,setComment}) => {
+const SessionModal= ({handleSessionView,selectWorkout,climbs, setClimbs,comment,setComment}) => {
    interface keyable {
       [key: string]: any  
     }
+
     const [exercise, setExercise] = useState(selectWorkout.exercise);
-    const [editComment, setEditComment] = useState(false);
-    const [commentChange, setCommentChange] = useState(false);
+    const [editComment, setEditComment] = useState<boolean>(false);
+    const [commentChange, setCommentChange] = useState<boolean>(false);
     const [newComment, setNewComment] = useState(selectWorkout.comments);
     const router = useRouter();
     const refreshData = () => {
@@ -46,13 +47,14 @@ const SessionModal = ({handleSessionView,selectWorkout,climbs, setClimbs,comment
       setNewComment(selectWorkout.comments)
    },[])
 
-    const handleCommentChange = (e:any) => {
+
+    const handleCommentChange = (event: React.FormEvent<HTMLInputElement>) => {
         if (!commentChange) {
             setCommentChange(true) };
-        setNewComment(e.target.value)
+        setNewComment(event.currentTarget.value)
     }
 
-    const handleModalChange = (e:any) => {
+    const handleModalChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setExercise({
       ...exercise,
       [e.target.name] : e.target.value

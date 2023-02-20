@@ -27,7 +27,6 @@ const ModalContent = styled.div`
 
 const AddWorkoutModal = ({modalForm, setModalForm,formError, handleFormSubmit, handleAddWorkout}) => {
   const handleModalChange = (e) => {
-    console.log(e.target.value)
     setModalForm({
       ...modalForm,
       [e.target.name] : e.target.value
@@ -36,7 +35,6 @@ const AddWorkoutModal = ({modalForm, setModalForm,formError, handleFormSubmit, h
 
   return(
     <Modal>
-   
       <ModalContent>
       <IconButton sx={{position: 'relative', top: '38%', left: '95%'}} onClick={handleAddWorkout}>
       <CloseIcon/>

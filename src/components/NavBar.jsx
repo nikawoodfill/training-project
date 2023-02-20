@@ -1,20 +1,15 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import bg from '../../public/trainingproject.png'
-import { navLinks } from "../../public/data.js";
 import { useRouter } from "next/router";
 
 
 function NavBar() {
+
   const router = useRouter();
-  
   const [hover, setHover] = useState(false);
   const [hover1, setHover1] = useState(false);
   const [hover2, setHover2] = useState(false);
- 
-
-
-
  
      
         return (

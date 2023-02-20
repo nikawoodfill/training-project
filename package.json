@@ -30,6 +30,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "react-lite-youtube-embed": "^2.3.52",
+    "react-scroll": "^1.8.9",
     "react-spring": "^9.6.1",
     "styled-components": "^5.3.6",
     "swr": "^2.0.1"
